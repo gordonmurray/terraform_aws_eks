@@ -21,4 +21,8 @@ module "my-cluster" {
       kubelet_extra_args = "--node-labels=node.kubernetes.io/lifecycle=spot"
     }
   ]
+
+  workers_group_defaults = {
+    root_volume_type = "gp2"
+  }
 }
