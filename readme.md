@@ -1,5 +1,7 @@
 # Kubernetes cluster on AWS EKS using Terraform
 
+[![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/gordonmurray/gordon-terraform-eks/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=gordonmurray%2Fgordon-terraform-eks&benchmark=ISO27001) [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/gordonmurray/gordon-terraform-eks/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=gordonmurray%2Fgordon-terraform-eks&benchmark=SOC2) [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/gordonmurray/gordon-terraform-eks/cis_kubernetes)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=gordonmurray%2Fgordon-terraform-eks&benchmark=CIS+KUBERNETES+V1.5)
+
 Before you begin, make sure you have the following installed:
 
 * Terraform - version 0.14.5 [link](https://www.terraform.io/downloads.html)
