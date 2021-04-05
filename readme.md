@@ -7,7 +7,6 @@ Before you begin, make sure you have the following installed:
 * Terraform - version 0.14.5 [link](https://www.terraform.io/downloads.html)
 * AWS CLI [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 * Kubectl [link](https://kubernetes.io/docs/tasks/tools/)
-* ArgoCD CLI [link](https://argoproj.github.io/argo-cd/cli_installation/)
 
 To create the cluster:
 
