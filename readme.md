@@ -32,35 +32,6 @@ kubectl get nodes
 kubectl get pods --all-namespaces
 ```
 
-Install ArgoCD
-
-```
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
-
-Change the argocd-server service type to LoadBalancer:
-
-```
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-```
-
-Port forward to get the ArgoCD UI
-
-```
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
-
-Log in using the CLI
-
-```
-# get password
-kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
-argocd login localhost:8080
-
-# change password
-argocd account update-password
-```
 
 List current cluster contexts
 
@@ -71,21 +42,25 @@ kubectl config get-contexts -o name
 ## Estimated cost, using Infracost
 
 ```
-  NAME                                                      MONTHLY QTY  UNIT       PRICE   HOURLY COST  MONTHLY COST  
+  NAME                                                                 MONTHLY QTY  UNIT       PRICE   HOURLY COST  MONTHLY COST  
 
-  module.my-cluster.aws_autoscaling_group.workers[0]                                                                   
-  └─ module.my-cluster.aws_launch_configuration.workers[0]  
-     ├─ Linux/UNIX usage (spot, m5.large)                           730  hours      0.0368       0.0368       26.8640  
-     ├─ EBS-optimized usage                                         730  hours      0.0000       0.0000        0.0000  
-     ├─ EC2 detailed monitoring                                       7  metrics    0.3000       0.0029        2.1000  
-     └─ root_block_device                                   
-        └─ General Purpose SSD storage (gp2)                        100  GB-months  0.1100       0.0151       11.0000  
-  Total                                                                                          0.0547       39.9640  
-                                                                                                                       
-  module.my-cluster.aws_eks_cluster.this[0]                                                                            
-  └─ EKS cluster                                                    730  hours      0.1000       0.1000       73.0000  
-  Total                                                                                          0.1000       73.0000  
-                                                                                                                       
-  OVERALL TOTAL (USD)                                                                            0.1547      112.9640  
-  ```
+  module.my-cluster.aws_autoscaling_group.workers_launch_template[0]                                                              
+  └─ module.my-cluster.aws_launch_template.workers_launch_template[0]  
+     ├─ EC2 detailed monitoring                                                  0  metrics    0.3000       0.0000        0.0000  
+     ├─ root_block_device                                              
+     │  └─ General Purpose SSD storage (gp2)                                     0  GB-months  0.1100       0.0000        0.0000  
+     └─ block_device_mapping[0]                                        
+        └─ General Purpose SSD storage (gp3)                                     0  GB-months  0.0880       0.0000        0.0000  
+  Total                                                                                                     0.0000        0.0000  
+                                                                                                                                  
+  module.my-cluster.aws_eks_cluster.this[0]                                                                                       
+  └─ EKS cluster                                                               730  hours      0.1000       0.1000       73.0000  
+  Total                                                                                                     0.1000       73.0000  
+                                                                                                                                  
+  OVERALL TOTAL (USD)                                                                                       0.1000       73.0000  
+
+1 resource type wasn't estimated as it's not supported yet.
+Please watch/star https://github.com/infracost/infracost as new resources are added regularly.
+1 x aws_autoscaling_policy 
+```
 

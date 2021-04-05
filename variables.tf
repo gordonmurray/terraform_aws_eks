@@ -59,3 +59,26 @@ data "aws_availability_zones" "available_azs" {
 }
 
 data "aws_caller_identity" "current" {} # used for accesing Account ID and ARN
+
+
+# create some variables
+variable "dns_base_domain" {
+  type        = string
+  description = "DNS Zone name to be used from EKS Ingress."
+}
+variable "ingress_gateway_chart_name" {
+  type        = string
+  description = "Ingress Gateway Helm chart name."
+}
+variable "ingress_gateway_chart_repo" {
+  type        = string
+  description = "Ingress Gateway Helm repository name."
+}
+variable "ingress_gateway_chart_version" {
+  type        = string
+  description = "Ingress Gateway Helm chart version."
+}
+variable "ingress_gateway_annotations" {
+  type        = map(string)
+  description = "Ingress Gateway Annotations required for EKS."
+}
