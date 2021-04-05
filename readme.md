@@ -69,32 +69,24 @@ List current cluster contexts
 kubectl config get-contexts -o name
 ```
 
-Add a context to ArgoCD
+## Estimated cost, using Infracost
 
 ```
-argocd cluster add {context}
-```
+  NAME                                                      MONTHLY QTY  UNIT       PRICE   HOURLY COST  MONTHLY COST  
 
-add --port-forward-namespace argocd flag to every CLI command:
+  module.my-cluster.aws_autoscaling_group.workers[0]                                                                   
+  └─ module.my-cluster.aws_launch_configuration.workers[0]  
+     ├─ Linux/UNIX usage (spot, m5.large)                           730  hours      0.0368       0.0368       26.8640  
+     ├─ EBS-optimized usage                                         730  hours      0.0000       0.0000        0.0000  
+     ├─ EC2 detailed monitoring                                       7  metrics    0.3000       0.0029        2.1000  
+     └─ root_block_device                                   
+        └─ General Purpose SSD storage (gp2)                        100  GB-months  0.1100       0.0151       11.0000  
+  Total                                                                                          0.0547       39.9640  
+                                                                                                                       
+  module.my-cluster.aws_eks_cluster.this[0]                                                                            
+  └─ EKS cluster                                                    730  hours      0.1000       0.1000       73.0000  
+  Total                                                                                          0.1000       73.0000  
+                                                                                                                       
+  OVERALL TOTAL (USD)                                                                            0.1547      112.9640  
+  ```
 
-```
-export ARGOCD_OPTS='--port-forward-namespace argocd'
-```
-
-Deploy Guestbook application
-
-```
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default
-```
-
-App status 
-
-```
-argocd app get guestbook
-```
-
-Sync app
-
-```
-argocd app sync guestbook
-```
