@@ -39,7 +39,7 @@ locals {
 module "my-cluster" {
   source           = "terraform-aws-modules/eks/aws"
   cluster_name     = "gordon-terraform-eks"
-  cluster_version  = "1.18"
+  cluster_version  = "1.19"
   write_kubeconfig = false
 
   subnets = ["subnet-0c91cf75e5da4c2a8", "subnet-03fdb36029c4ce2cd"]
