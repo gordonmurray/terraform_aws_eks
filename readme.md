@@ -39,28 +39,22 @@ List current cluster contexts
 kubectl config get-contexts -o name
 ```
 
-## Estimated cost, using Infracost
+## Estimated cost, using [Infracost](https://github.com/infracost/infracost)
 
 ```
-  NAME                                                                 MONTHLY QTY  UNIT       PRICE   HOURLY COST  MONTHLY COST  
-
-  module.my-cluster.aws_autoscaling_group.workers_launch_template[0]                                                              
-  └─ module.my-cluster.aws_launch_template.workers_launch_template[0]  
-     ├─ EC2 detailed monitoring                                                  0  metrics    0.3000       0.0000        0.0000  
-     ├─ root_block_device                                              
-     │  └─ General Purpose SSD storage (gp2)                                     0  GB-months  0.1100       0.0000        0.0000  
-     └─ block_device_mapping[0]                                        
-        └─ General Purpose SSD storage (gp3)                                     0  GB-months  0.0880       0.0000        0.0000  
-  Total                                                                                                     0.0000        0.0000  
-                                                                                                                                  
-  module.my-cluster.aws_eks_cluster.this[0]                                                                                       
-  └─ EKS cluster                                                               730  hours      0.1000       0.1000       73.0000  
-  Total                                                                                                     0.1000       73.0000  
-                                                                                                                                  
-  OVERALL TOTAL (USD)                                                                                       0.1000       73.0000  
-
-1 resource type wasn't estimated as it's not supported yet.
-Please watch/star https://github.com/infracost/infracost as new resources are added regularly.
-1 x aws_autoscaling_policy 
+ Name                                                      Quantity  Unit       Monthly Cost 
+                                                                                             
+ module.my-cluster.aws_autoscaling_group.workers[0]                                          
+ └─ module.my-cluster.aws_launch_configuration.workers[0]                                    
+    ├─ Instance usage (Linux/UNIX, spot, m5.large)              730  hours            $26.94 
+    ├─ EBS-optimized usage                                      730  hours             $0.00 
+    ├─ EC2 detailed monitoring                                    7  metrics           $2.10 
+    └─ root_block_device                                                                     
+       └─ Storage (general purpose SSD, gp2)                    100  GB-months        $11.00 
+                                                                                             
+ module.my-cluster.aws_eks_cluster.this[0]                                                   
+ └─ EKS cluster                                                 730  hours            $73.00 
+                                                                                             
+ PROJECT TOTAL                                                                       $113.04        
 ```
 
