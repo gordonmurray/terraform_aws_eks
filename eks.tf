@@ -15,9 +15,9 @@ module "my-cluster" {
 
   worker_groups = [
     {
-      instance_type      = "m5.large"
+      instance_type      = "t3.large"
       asg_max_size       = 2
-      spot_price         = "0.0370"
+      spot_price         = "0.02900"
       kubelet_extra_args = "--node-labels=node.kubernetes.io/lifecycle=spot"
     }
   ]

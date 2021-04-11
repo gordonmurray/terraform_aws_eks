@@ -42,19 +42,19 @@ kubectl config get-contexts -o name
 ## Estimated cost, using [Infracost](https://github.com/infracost/infracost)
 
 ```
- Name                                                      Quantity  Unit       Monthly Cost 
-                                                                                             
- module.my-cluster.aws_autoscaling_group.workers[0]                                          
- └─ module.my-cluster.aws_launch_configuration.workers[0]                                    
-    ├─ Instance usage (Linux/UNIX, spot, m5.large)              730  hours            $26.94 
-    ├─ EBS-optimized usage                                      730  hours             $0.00 
-    ├─ EC2 detailed monitoring                                    7  metrics           $2.10 
-    └─ root_block_device                                                                     
-       └─ Storage (general purpose SSD, gp2)                    100  GB-months        $11.00 
-                                                                                             
- module.my-cluster.aws_eks_cluster.this[0]                                                   
- └─ EKS cluster                                                 730  hours            $73.00 
-                                                                                             
- PROJECT TOTAL                                                                       $113.04        
+ Name                                                           Quantity  Unit            Monthly Cost 
+                                                                                                       
+ module.my-cluster.aws_autoscaling_group.workers[0]                                                    
+ └─ module.my-cluster.aws_launch_configuration.workers[0]                                              
+    ├─ Instance usage (Linux/UNIX, spot, t3.large)                   730  hours                 $20.44 
+    ├─ EC2 detailed monitoring                                         7  metrics                $2.10 
+    ├─ CPU credits                                         Cost depends on usage: $0.05 per vCPU-hours 
+    └─ root_block_device                                                                               
+       └─ Storage (general purpose SSD, gp2)                         100  GB-months             $11.00 
+                                                                                                       
+ module.my-cluster.aws_eks_cluster.this[0]                                                             
+ └─ EKS cluster                                                      730  hours                 $73.00 
+                                                                                                       
+ PROJECT TOTAL                                                                                 $106.54 
 ```
 
