@@ -1,17 +1,9 @@
 
-variable "namespaces" {
-  type        = list(string)
-  description = "List of namespaces to be created in our EKS Cluster."
-}
-
-# create Namespaces in EKS
-resource "kubernetes_namespace" "eks_namespaces" {
-  for_each = toset(var.namespaces)
-
+resource "kubernetes_namespace" "hello_world_namespace" {
   metadata {
-    annotations = {
-      name = each.key
+    labels = {
+      app = "hello-world-example"
     }
-    name = each.key
+    name = "hello-world-namespace"
   }
 }

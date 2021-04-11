@@ -1,57 +1,29 @@
-resource "kubernetes_deployment" "example" {
+resource "kubernetes_deployment" "hello_world_deployment" {
   metadata {
-    name = "terraform-example"
+    name = "kubernetes-example-deployment"
+    namespace = "hello-world-namespace"
     labels = {
-      test = "MyExampleApp"
+      app = "hello-world-example"
     }
   }
 
   spec {
-    replicas = 3
-
+    replicas = 2
     selector {
       match_labels = {
-        test = "MyExampleApp"
+        app = "hello-world-example"
       }
     }
-
     template {
       metadata {
         labels = {
-          test = "MyExampleApp"
+          app = "hello-world-example"
         }
       }
-
       spec {
         container {
-          image = "nginx:1.7.8"
-          name  = "example"
-
-          resources {
-            limits = {
-              cpu    = "0.5"
-              memory = "512Mi"
-            }
-            requests = {
-              cpu    = "250m"
-              memory = "50Mi"
-            }
-          }
-
-          liveness_probe {
-            http_get {
-              path = "/"
-              port = 80
-
-              http_header {
-                name  = "X-Custom-Header"
-                value = "Awesome"
-              }
-            }
-
-            initial_delay_seconds = 3
-            period_seconds        = 3
-          }
+          image = "heroku/nodejs-hello-world"
+          name  = "hello-world"
         }
       }
     }
