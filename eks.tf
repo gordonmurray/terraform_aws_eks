@@ -10,8 +10,8 @@ module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "gordon-terraform-eks"
   cluster_version = "1.19"
-  subnets         = ["subnet-0c91cf75e5da4c2a8", "subnet-03fdb36029c4ce2cd"]
-  vpc_id          = "vpc-07786849f225d751a"
+  subnets         = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
+  vpc_id          = aws_vpc.vpc.id
 
   worker_groups = [
     {

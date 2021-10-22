@@ -5,14 +5,14 @@ resource "kubernetes_service" "hello_world_service" {
     labels = {
       app = "hello-world-example"
     }
-    name = "hello-world-example"
+    name      = "hello-world-example"
     namespace = "hello-world-namespace"
   }
 
   spec {
     port {
-      name = "api"
-      port = 3000
+      name        = "api"
+      port        = 3000
       target_port = 3000
     }
     selector = {

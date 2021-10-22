@@ -1,12 +1,12 @@
 resource "kubernetes_ingress" "ingress" {
   metadata {
     labels = {
-      app                               = "ingress-nginx"
+      app = "ingress-nginx"
     }
-    name = "api-ingress"
+    name      = "api-ingress"
     namespace = "hello-world-namespace"
     annotations = {
-      "kubernetes.io/ingress.class": "nginx-hello-world-namespace"
+      "kubernetes.io/ingress.class" : "nginx-hello-world-namespace"
     }
   }
 
