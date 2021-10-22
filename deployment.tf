@@ -1,6 +1,6 @@
 resource "kubernetes_deployment" "hello_world_deployment" {
   metadata {
-    name = "kubernetes-example-deployment"
+    name      = "kubernetes-example-deployment"
     namespace = "hello-world-namespace"
     labels = {
       app = "hello-world-example"
