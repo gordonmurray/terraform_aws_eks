@@ -9,7 +9,7 @@ data "aws_eks_cluster_auth" "cluster" {
 module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = "terraform-eks"
-  cluster_version = "1.19"
+  cluster_version = "1.20"
   subnets         = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
   vpc_id          = aws_vpc.vpc.id
 
@@ -17,7 +17,7 @@ module "my-cluster" {
     {
       instance_type      = "t3.large"
       asg_max_size       = 2
-      spot_price         = "0.02900"
+      spot_price         = "0.0290" #https://aws.amazon.com/ec2/spot/pricing/
       kubelet_extra_args = "--node-labels=node.kubernetes.io/lifecycle=spot"
     }
   ]
