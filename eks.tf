@@ -8,7 +8,7 @@ data "aws_eks_cluster_auth" "cluster" {
 
 module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = "gordon-terraform-eks"
+  cluster_name    = "terraform-eks"
   cluster_version = "1.19"
   subnets         = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
   vpc_id          = aws_vpc.vpc.id
