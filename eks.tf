@@ -8,21 +8,29 @@ data "aws_eks_cluster_auth" "cluster" {
 
 module "my-cluster" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "18.8.1"
   cluster_name    = "terraform-eks"
-  cluster_version = "1.20"
-  subnets         = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
+  cluster_version = "1.21"
+  subnet_ids      = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
   vpc_id          = aws_vpc.vpc.id
 
-  worker_groups = [
-    {
-      instance_type      = "t3.large"
-      asg_max_size       = 2
-      spot_price         = "0.0290" #https://aws.amazon.com/ec2/spot/pricing/
-      kubelet_extra_args = "--node-labels=node.kubernetes.io/lifecycle=spot"
-    }
-  ]
+  eks_managed_node_groups = {
 
-  workers_group_defaults = {
-    root_volume_type = "gp2"
+    green = {
+      min_size     = 1
+      max_size     = 3
+      desired_size = 1
+
+      instance_types = ["t3.large"]
+      capacity_type  = "SPOT"
+      labels = {
+        Environment = "test"
+      }
+
+    }
+  }
+
+  tags = {
+    Repo = "terraform_aws_eks"
   }
 }
