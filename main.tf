@@ -22,9 +22,9 @@ terraform {
 }
 
 provider "aws" {
-  region                  = "eu-west-1"
-  shared_credentials_file = "~/.aws/credentials"
-  profile                 = "default"
+  region                   = "eu-west-1"
+  shared_credentials_files = ["~/.aws/credentials"]
+  profile                  = "default"
 }
 
 provider "kubernetes" {
