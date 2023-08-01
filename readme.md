@@ -40,9 +40,9 @@ kubectl config get-contexts -o name
 ## Estimated cost, using [Infracost](https://github.com/infracost/infracost)
 
 ```
-Project: gordonmurray/terraform_aws_eks/.
+Project: gordonmurray/terraform_aws_eks
 
- Name                                                                                        Monthly Qty  Unit              Monthly Cost
+ Name                                                                                           Monthly Qty  Unit                    Monthly Cost
 
  module.my-cluster.aws_cloudwatch_log_group.this[0]
  ├─ Data ingested                                                                         Monthly cost depends on usage: $0.57 per GB
@@ -50,16 +50,37 @@ Project: gordonmurray/terraform_aws_eks/.
  └─ Insights queries data scanned                                                         Monthly cost depends on usage: $0.0057 per GB
 
  module.my-cluster.aws_eks_cluster.this[0]
- └─ EKS cluster                                                                                      730  hours                   $73.00
+ └─ EKS cluster                                                                                         730  hours                         $73.00
 
  module.my-cluster.module.eks_managed_node_group["green"].aws_eks_node_group.this[0]
  └─ module.my-cluster.module.eks_managed_node_group["green"].aws_launch_template.this[0]
-    ├─ Instance usage (Linux/UNIX, on-demand, )                                                      730  hours                    $0.00
-    └─ EC2 detailed monitoring                                                                         7  metrics                  $2.10
+    ├─ Instance usage (Linux/UNIX, on-demand, t3.large)                                                 730  hours                         $66.58
+    └─ EC2 detailed monitoring                                                                            7  metrics                        $2.10
 
- OVERALL TOTAL                                                                                                                    $75.10
+ module.my-cluster.module.kms.aws_kms_key.this[0]
+ ├─ Customer master key                                                                                   1  months                         $1.00
+ ├─ Requests                                                                              Monthly cost depends on usage: $0.03 per 10k requests
+ ├─ ECC GenerateDataKeyPair requests                                                      Monthly cost depends on usage: $0.10 per 10k requests
+ └─ RSA GenerateDataKeyPair requests                                                      Monthly cost depends on usage: $0.10 per 10k requests
+
+ OVERALL TOTAL                                                                                                                            $142.68
 ──────────────────────────────────
-37 cloud resources were detected, rerun with --show-skipped to see details:
-∙ 3 were estimated, 2 include usage-based costs, see https://infracost.io/usage-file
-∙ 34 were free
+39 cloud resources were detected:
+∙ 4 were estimated, 2 of which include usage-based costs, see https://infracost.io/usage-file
+∙ 35 were free:
+  ∙ 11 x aws_security_group_rule
+  ∙ 6 x aws_iam_role_policy_attachment
+  ∙ 3 x aws_subnet
+  ∙ 2 x aws_iam_role
+  ∙ 2 x aws_route_table_association
+  ∙ 2 x aws_security_group
+  ∙ 1 x aws_ec2_tag
+  ∙ 1 x aws_iam_openid_connect_provider
+  ∙ 1 x aws_iam_policy
+  ∙ 1 x aws_internet_gateway
+  ∙ 1 x aws_kms_alias
+  ∙ 1 x aws_launch_template
+  ∙ 1 x aws_route
+  ∙ 1 x aws_route_table
+  ∙ 1 x aws_vpc
 ```
