@@ -2,7 +2,7 @@
 
 Before you begin, make sure you have the following installed:
 
-* Terraform - version 1.1.8 [link](https://www.terraform.io/downloads.html)
+* Terraform - version 1.4.2 [link](https://www.terraform.io/downloads.html)
 * AWS CLI [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 * Kubectl [link](https://kubernetes.io/docs/tasks/tools/)
 * Helm [link](https://helm.sh/docs/intro/install/)
